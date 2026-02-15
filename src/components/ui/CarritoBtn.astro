@@ -1,0 +1,27 @@
+---
+import fondo from '../../assets/carrito_btn.svg'
+---
+
+<a href="/mercar" class="mercar__button">
+  <img class="mercar__img" src={fondo.src} alt="Icono de carrito de compras" />
+</a>
+
+<style>
+  .mercar__button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    padding: 5px 15px;
+  }
+
+  .mercar__button:hover{
+        filter:brightness(70%);
+
+  }
+
+  .mercar__img{
+    max-width: 70px;
+  }
+</style>

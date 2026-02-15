@@ -1,0 +1,32 @@
+---
+import bolsa from '../../assets/img/icons/mercar_icon.svg'
+import fondo from '../../assets/topbar-comprar-btn_xA0_Imagen.svg'
+---
+
+<a href="/mercar" class="mercar__button">
+  <img src={bolsa.src} alt="Icono de mercar cunha bolsa de monedas" />
+  MERCAR
+</a>
+
+<style define:vars={{ bgImage: `url(${fondo.src})` }}>
+  .mercar__button {
+    background-image: var(--bgImage);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 15px;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--gold);
+    font-family: var(--font-secondary);
+    min-width: 200px;
+    height: 40px;
+  }
+
+  .mercar__button:hover{
+    filter:brightness(70%);
+  }
+</style>

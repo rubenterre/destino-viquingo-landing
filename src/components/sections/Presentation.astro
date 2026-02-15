@@ -1,0 +1,128 @@
+---
+import Trailer from "../ui/Trailer.astro";
+import MercarBtn from "../ui/MercarBtn.astro";
+import TrailerBtn from "../ui/TrailerBtn.astro";
+
+import trenza from "../../assets/hero-trenza.svg";
+import titular from "../../assets/vectorizados/Unha_viaxe_ilustrada.svg";
+import fondo from "../../assets/img/Mapa_salnes_medieval.webp";
+/* import nieblaBottom from "../../assets/niebla_bottom.webp" */
+---
+
+<section class="presentation">
+  <div class="container">
+    <div class="row">
+      <div class="col s6">
+        <div class="presentation__video">
+          <Trailer />
+        </div>
+      </div>
+      <div class="col s6">
+        <div class="presentation__details">
+          <div class="presentation__box">
+            <h2 class="presentation__h2">PRESENTACIÓN</h2>
+            <img
+              class="presentation__trenza"
+              src={trenza.src}
+              alt="Ornamento viquingo"
+            />
+          </div>
+
+          <img
+            class="presentation__title"
+            src={titular.src}
+            alt="Titulo de Descobre a historia viquinga de Galicia"
+          />
+          <p class="presentation__description">
+            Embárcate nunha aventura visual con Destino viquingo: A comarca do
+            Salnés. Explora a rica historia das incursións viquingas en Galicia
+            co apoio de impresionantes ilustracións e mapas que che axudarán a
+            visualizar cada detalle.
+          </p>
+
+          <div class="presentation__buttons">
+            <MercarBtn />
+            <TrailerBtn />
+          </div>
+          <p class="presentation__p">
+            Dispoñible en exclusiva en esta web. <br /> Só para mercar en España (Península,
+            Baleares e Canarias)
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- <div class="ornament-cloud">
+		<img class="ornament-cloud__niebla" src={nieblaBottom.src} alt="Ornamento de niebla">
+</div> -->
+
+<style define:vars={{ bgFondo: `url(${fondo.src})` }}>
+  .presentation {
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--bgFondo);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .presentation__video {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+
+  .presentation__details {
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    flex-direction: column;
+    gap: 2rem;
+    height: 100%;
+  }
+
+  .presentation__h2 {
+    font-family: var(--font-secondary);
+    font-size: 1rem;
+    color: var(--text-color-texto-secundario);
+    margin-bottom: 10px;
+  }
+
+  .presentation__trenza {
+    max-width: 100px;
+  }
+
+  .presentation__title {
+    max-width: 100%;
+  }
+
+  .presentation__description {
+    font-family: var(--font-primary);
+    font-size: 1rem;
+    color: var(--text-color-texto-principal);
+  }
+
+  .presentation__buttons {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 1rem;
+    margin: 2rem 0px;
+  }
+
+  .presentation__p {
+    font-family: var(--font-primary);
+    color: var(--text-color-texto-principal);
+    font-size: 0.8rem;
+  }
+
+  /*   .ornament-cloud{
+    width: 100vw;
+  
+  } */
+</style>

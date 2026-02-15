@@ -1,0 +1,312 @@
+---
+import logo from "../../assets/Destino_Viquingo_logo.svg";
+import instagramIcon from "../../assets/img/icons/social/instagram_icon_social.webp";
+import linkedinIcon from "../../assets/img/icons/social/linkedin_icon_social.webp";
+import behanceIcon from "../../assets/img/icons/social/behance_icon_social.webp";
+import corvo from "../../assets/img/icons/cuervo_vikingo.svg";
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__details">
+        <!-- Logo -->
+        <div class="footer__logo-box">
+          <a href="/" class="footer__a--logo">
+            <div class="footer__column footer__brand">
+              <img
+                class="footer__logo"
+                src={logo.src}
+                alt="Logo de Destino Viquingo"
+              />
+            </div>
+          </a>
+          <div class="footer__corvo">
+            <img
+              src={corvo.src}
+              alt="Icono de detalle do corvo viquingo"
+              class="footer__corvo-img"
+            />
+          </div>
+        </div>
+
+        <p class="footer__p">
+          Páxina web do libro 'Destino viquingo: a comarca do Salnes'. Descobre
+          a fascinante historia dos viquingos na comarca do Salnes con este
+          libro.
+        </p>
+      </div>
+
+      <!-- Mapa del sitio -->
+      <nav class="footer__column">
+        <h3 class="footer__heading">Mapa del sitio</h3>
+        <ul class="footer__list">
+          <li><a href="/">Inicio</a></li>
+          <li><a href="/catalogo">Mercar</a></li>
+<!--           <li><a href="/experiencia">Experiencia</a></li>
+ -->          <li><a href="/contacto">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <!-- Aviso legal -->
+      <nav class="footer__column">
+        <h3 class="footer__heading">Aviso legal</h3>
+        <ul class="footer__list">
+          <li><a href="/aviso-legal">Aviso legal</a></li>
+          <li><a href="/privacidad">Política de privacidad</a></li>
+          <li><a href="/condiciones">Condiciones del servicio</a></li>
+          <li><a href="https://rubenterre.com">Créditos</a></li>
+        </ul>
+      </nav>
+
+      <!-- Contacto -->
+      <div class="footer__column footer__column--contact">
+        <h3 class="footer__heading">Contacto</h3>
+        <ul class="footer__list">
+          <li><a href="/contacto">Axuda & Soporte</a></li>
+        </ul>
+
+        <div class="footer__social">
+          <div class="footer__social-icons">
+            <a
+              href=""
+              aria-label="Linkedin"
+            >
+              <span class="social-icon">
+                <img src={linkedinIcon.src} alt="Icono de Linkedin" />
+              </span>
+            </a>
+            <a
+              href=""
+              aria-label="Instagram"
+            >
+              <span class="social-icon">
+                <img src={instagramIcon.src} alt="Icono de Instagram" />
+              </span>
+            </a>
+            <a
+              href=""
+              aria-label="Behance"
+            >
+              <span class="social-icon">
+                <img src={ behanceIcon.src} alt="Icono de Behance" />
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer__divider"></div>
+
+    <div class="footer__bottom">
+      <p class="footer__copy">
+        © 2026 Destino viquingo - Diseñado y desarrollado por <a
+          class="footer__a"
+          href="https://rubenterre.com"
+          target="_blank">Rubén Terré</a
+        >
+      </p>
+      <div class="footer__bottom-links">
+        <a href="/privacidad">Política de privacidad</a>
+        <a href="/condiciones">Condiciones del servicio</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--card-bg);
+    color: var(--light);
+    padding: 3rem 0 2rem;
+    font-family: var(--font-secondary);
+  }
+
+  .footer__top {
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .footer__logo-box {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .footer__logo {
+    width: 140px;
+    max-height: 99px;
+  }
+
+  .footer__corvo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(
+      0deg,
+      var(--theme-color-acento) 0%,
+      rgba(11, 9, 7, 0) 100%
+    );
+    border-bottom: 2px solid var(--gold);
+  }
+
+  .footer__corvo::after {
+    content: url(assets/nav-top-home-decopng.png);
+    width: 100%;
+    position: relative;
+    top: 4px;
+  }
+
+  .footer__p {
+    max-width: 300px;
+    padding: 15px 0px;
+    font-family: var(--font-primary);
+    font-size: 1rem;
+    line-height: 26px;
+    color: var(--text-color-texto-primario);
+  }
+
+  .footer__heading {
+    font-family: var(--font-secondary);
+    font-size: 1.3rem;
+    color: var(--text-color-texto-primario);
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .footer__heading::after {
+    content: "";
+    width: 92px;
+    height: 2px;
+background: linear-gradient(90deg,rgba(236, 180, 68, 1) 0%, rgba(140, 44, 20, 1) 100%);
+  }
+
+  .footer__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .footer__list li {
+    margin-bottom: 0.3rem;
+  }
+
+  .footer__list a {
+    font-family: var(--font-primary);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    text-decoration: none;
+  }
+
+  .footer__list a:hover {
+    color: var(--main-color);
+  }
+
+  .footer__a--logo {
+    text-decoration: none;
+  }
+
+  .footer__a {
+    font-family: var(--font-primary);
+    color: var(--text-secondary);
+  }
+
+  .footer__a:hover {
+    color: var(--main-color);
+  }
+
+  .footer__column--contact {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .footer__social-label {
+    font-family: var(--font-secondary);
+    color: var(--text-color-texto-primario);
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+
+  .footer__social-label:after{
+        content: "";
+    width: 92px;
+    height: 2px;
+background: linear-gradient(90deg,rgba(236, 180, 68, 1) 0%, rgba(140, 44, 20, 1) 100%);
+  }
+
+  .footer__social-icons {
+    display: flex;
+    gap: .7rem;
+  }
+
+  .social-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .footer__divider {
+    margin: 2rem auto 1.5rem;
+    border-bottom: 1px solid #24272d;
+  }
+
+  .footer__bottom {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.75rem;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+  }
+
+  .footer__copy {
+    margin: 0;
+    font-family: var(--font-primary);
+    font-size: .8rem;
+    color: var(--text-color-texto-primario);
+  }
+
+  .footer__bottom-links {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .footer__bottom-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-family: var(--font-primary);
+  }
+
+  .footer__bottom-links a:hover {
+    color: var(--light);
+  }
+
+  @media (max-width: 900px) {
+    .footer__top {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .footer__top {
+      grid-template-columns: 1fr;
+    }
+
+    .footer__bottom {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

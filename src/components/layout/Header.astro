@@ -1,0 +1,148 @@
+---
+import logo from "../../assets/Destino_Viquingo_logo.svg";
+import corvo from "../../assets/img/icons/cuervo_vikingo.svg";
+import CarritoBtn from "../ui/CarritoBtn.astro";
+import MercarBtn from "../ui/MercarBtn.astro";
+import fondo from "../../assets/topbar-bg.png";
+
+const pathname = Astro.url.pathname;
+---
+
+<header class="header" style={`background-image: url(${fondo.src});`}>
+  <div class="container">
+    <div class="header__row">
+      <div class="header__logo">
+        <div class="header__logo-icon">
+          <img
+            src={logo.src}
+            alt="Logo de Destino Viquingo"
+            class="header__logo-img"
+          />
+        </div>
+        <div class="header__corvo">
+          <img
+            src={corvo.src}
+            alt="Icono de detalle do corvo viquingo"
+            class="header__corvo-img"
+          />
+        </div>
+      </div>
+      <nav class="header__nav">
+        <a
+          href="/"
+          class:list={{
+            header__a: true,
+            header__active: pathname === '/',
+          }}
+          aria-current={pathname.startsWith("/") ? "page" : "false"}
+          >INICIO</a
+        >
+        <a
+          href="/contacto"
+          class:list={{
+            header__a: true,
+            header__active: pathname.startsWith("/contacto"),
+          }}
+          aria-current={pathname.startsWith("/contacto") ? "page" : "false"}
+          >CONTACTO</a
+        >
+      </nav>
+      <div class="header__mercar">
+        <MercarBtn />
+        <CarritoBtn />
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  .header {
+    width: 100vw;
+    padding-top: 17px;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .header__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .header__logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+  }
+
+  .header__logo-img {
+    min-height: 43px;
+  }
+
+  .header__corvo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(
+      0deg,
+      var(--theme-color-acento) 0%,
+      rgba(11, 9, 7, 0) 100%
+    );
+    border-bottom: 2px solid var(--gold);
+  }
+
+  .header__corvo::after {
+    content: url(assets/nav-top-home-decopng.png);
+    width: 100%;
+    position: relative;
+    top: 4px;
+  }
+
+  .header__nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .header__a {
+    font-family: var(--font-secondary);
+    font-size: 1rem;
+    font-weight: 400;
+    text-align: center;
+    line-height: 26px;
+    color: var(--text-color-texto-principal);
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 80px;
+  }
+
+.header__active {
+  color: var(--gold);
+}
+
+.header__active::after {
+  content: url(/assets/nav-top-home-decopng.png);
+  width: 100%;
+  position: relative;
+  top: 4px;
+  height: 2px;
+}
+
+  .header__a:hover {
+    color: var(--gold);
+  }
+
+  .header__mercar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+</style>

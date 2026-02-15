@@ -1,0 +1,372 @@
+---
+
+---
+
+<!doctype html>
+<html lang="gl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Destino viquingo: a comarca do Salnés - Libro divulgativo</title>
+    <meta
+      name="description"
+      content="Páxina web do libro 'Destino viquingo: a comarca do Salnes'. Descobre a fascinante historia dos viquingos na comarca do Salnes con este libro."
+    />
+    <meta name="author" content="Rubén Arturo Terré Lameiro" />
+
+    <!-- Open Graph básico -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_ES" />
+
+    <meta
+      property="og:title"
+      content="Destino viquingo: a comarca do Salnés - Libro divulgativo"
+    />
+    <meta
+      property="og:site_name"
+      content="Destino viquingo: a comarca do Salnés"
+    />
+
+    <meta property="og:url" content="https://destinoviquingo.rubenterre.com/" />
+    <meta
+      property="og:image"
+      content="https://destinoviquingo.rubenterre.com/og/entradas-vivas-cover.png"
+    />
+    <meta
+      property="og:image:alt"
+      content="Destino viquingo: a comarca do Salnés - Libro divulgativo"
+    />
+
+    <!-- Opcional: para destacar catálogo / producto -->
+    <meta property="og:type" content="product" />
+    <meta property="product:availability" content="available" />
+    <meta property="product:condition" content="new" />
+
+    <!-- Twitter Cards -->
+    <!-- Twitter Card meta tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Destino viquingo: a comarca do Salnés"
+    />
+    <meta
+      name="twitter:description"
+      content="O libro dos viquingos na comarca do Salnés. Descobre a fascinante historia dos viquingos na comarca do Salnes con este libro."
+    />
+    <meta
+      name="twitter:image"
+      content="https://destinoviquingo.rubenterre.com/assets/img/Destino_Viquingo_libro.jpg"
+    />
+    <meta name="twitter:site" content="@RubenTerre" />
+
+    <!-- Otros meta tags -->
+    <link rel="canonical" href="https://destinoviquingo.rubenterre.com" />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  * {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    font-size: 14px;
+    scroll-behavior: smooth;
+  }
+
+  @font-face {
+    font-family: Montserrat;
+    src: url(/fonts/Montserrat-VariableFont_wght.ttf);
+  }
+
+  @font-face {
+    font-family: Alice;
+    src: url(/fonts/Alice-Regular.ttf);
+  }
+
+  :root {
+    --acento-suave: #b4945d;
+    --azul_medieval: #1a1d26;
+    --gold: #f5c889;
+    --text-color-texto-principal: #f7f3ea;
+    --text-color-texto-secundario: #bcad90;
+    --theme-color-acento: #8c2c14;
+    --theme-color-dorado: #ecb444;
+    --theme-color-fondo-principal: #0b0907;
+    --theme-color-fondo-secundario: #1a1410;
+    --theme-color-oscuro: #503a2b;
+    --theme-color-pergamino: #f3e4cf;
+
+    /* Tipografías (como ya tenías) */
+    --font-primary: Montserrat;
+    --font-secondary: Alice;
+  }
+
+  body {
+    background: var(--theme-color-fondo-principal);
+    color: var(--text-color-texto-principal);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body,
+  input,
+  button {
+    font-family: var(--font-primary);
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  /* Estilos generales */
+
+/*********************
+  Media Query Classes
+**********************/
+@media only screen and (max-width: 600.99px) {
+  .hide-on-small-only,
+  .hide-on-small-and-down {
+    display: none !important;
+  }
+}
+
+@media only screen and (max-width: 992.99px) {
+  .hide-on-med-and-down {
+    display: none !important;
+  }
+}
+
+@media only screen and (min-width: 601px) {
+  .hide-on-med-and-up {
+    display: none !important;
+  }
+}
+
+@media only screen and (min-width: 601px) and (max-width: 992.99px) {
+  .hide-on-med-only {
+    display: none !important;
+  }
+}
+
+@media only screen and (min-width: 993px) {
+  .hide-on-large-only {
+    display: none !important;
+  }
+}
+
+@media only screen and (min-width: 1201px) {
+  .hide-on-extra-large-only {
+    display: none !important;
+  }
+}
+
+@media only screen and (min-width: 1201px) {
+  .show-on-extra-large {
+    display: block !important;
+  }
+}
+
+@media only screen and (min-width: 993px) {
+  .show-on-large {
+    display: block !important;
+  }
+}
+
+@media only screen and (min-width: 601px) and (max-width: 992.99px) {
+  .show-on-medium {
+    display: block !important;
+  }
+}
+
+@media only screen and (max-width: 600.99px) {
+  .show-on-small {
+    display: block !important;
+  }
+}
+
+@media only screen and (min-width: 601px) {
+  .show-on-medium-and-up {
+    display: block !important;
+  }
+}
+
+@media only screen and (max-width: 992.99px) {
+  .show-on-medium-and-down {
+    display: block !important;
+  }
+}
+
+/* Center text on mobile */
+@media only screen and (max-width: 600.99px) {
+  .center-on-small-only {
+    text-align: center;
+  }
+}
+
+/* Grid system */
+
+.container {
+  margin: 0 auto;
+  max-width: 1280px;
+  width: 90%;
+}
+
+@media only screen and (min-width: 601px) {
+  .container {
+    width: 85%;
+  }
+}
+
+@media only screen and (min-width: 993px) {
+  .container {
+    width: 70%;
+  }
+}
+
+.section {
+  padding: 1rem 0;
+}
+
+/* No se usan los mixins reset-offset y grid-classes en el CSS resultante */
+
+/* Grid principal */
+
+body {
+  --gap-size: 1.5rem; /* default */
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--gap-size);
+}
+
+/* --- S */
+.row .s1  { grid-column: auto / span 1; }
+.row .s2  { grid-column: auto / span 2; }
+.row .s3  { grid-column: auto / span 3; }
+.row .s4  { grid-column: auto / span 4; }
+.row .s5  { grid-column: auto / span 5; }
+.row .s6  { grid-column: auto / span 6; }
+.row .s7  { grid-column: auto / span 7; }
+.row .s8  { grid-column: auto / span 8; }
+.row .s9  { grid-column: auto / span 9; }
+.row .s10 { grid-column: auto / span 10; }
+.row .s11 { grid-column: auto / span 11; }
+.row .s12 { grid-column: auto / span 12; }
+
+.row .offset-s1  { grid-column-start: 3; }
+.row .offset-s2  { grid-column-start: 2; }
+.row .offset-s3  { grid-column-start: 4; }
+.row .offset-s4  { grid-column-start: 5; }
+.row .offset-s5  { grid-column-start: 6; }
+.row .offset-s6  { grid-column-start: 7; }
+.row .offset-s7  { grid-column-start: 8; }
+.row .offset-s8  { grid-column-start: 9; }
+.row .offset-s9  { grid-column-start: 10; }
+.row .offset-s10 { grid-column-start: 11; }
+.row .offset-s11 { grid-column-start: 12; }
+
+/* --- M */
+@media only screen and (min-width: 601px) {
+  .row .m1  { grid-column: auto / span 1; }
+  .row .m2  { grid-column: auto / span 2; }
+  .row .m3  { grid-column: auto / span 3; }
+  .row .m4  { grid-column: auto / span 4; }
+  .row .m5  { grid-column: auto / span 5; }
+  .row .m6  { grid-column: auto / span 6; }
+  .row .m7  { grid-column: auto / span 7; }
+  .row .m8  { grid-column: auto / span 8; }
+  .row .m9  { grid-column: auto / span 9; }
+  .row .m10 { grid-column: auto / span 10; }
+  .row .m11 { grid-column: auto / span 11; }
+  .row .m12 { grid-column: auto / span 12; }
+
+  .row .offset-m1  { grid-column-start: 2; }
+  .row .offset-m2  { grid-column-start: 3; }
+  .row .offset-m3  { grid-column-start: 4; }
+  .row .offset-m4  { grid-column-start: 5; }
+  .row .offset-m5  { grid-column-start: 6; }
+  .row .offset-m6  { grid-column-start: 7; }
+  .row .offset-m7  { grid-column-start: 8; }
+  .row .offset-m8  { grid-column-start: 9; }
+  .row .offset-m9  { grid-column-start: 10; }
+  .row .offset-m10 { grid-column-start: 11; }
+  .row .offset-m11 { grid-column-start: 12; }
+}
+
+/* --- L */
+@media only screen and (min-width: 993px) {
+  .row .l1  { grid-column: auto / span 1; }
+  .row .l2  { grid-column: auto / span 2; }
+  .row .l3  { grid-column: auto / span 3; }
+  .row .l4  { grid-column: auto / span 4; }
+  .row .l5  { grid-column: auto / span 5; }
+  .row .l6  { grid-column: auto / span 6; }
+  .row .l7  { grid-column: auto / span 7; }
+  .row .l8  { grid-column: auto / span 8; }
+  .row .l9  { grid-column: auto / span 9; }
+  .row .l10 { grid-column: auto / span 10; }
+  .row .l11 { grid-column: auto / span 11; }
+  .row .l12 { grid-column: auto / span 12; }
+
+  .row .offset-l1  { grid-column-start: 2; }
+  .row .offset-l2  { grid-column-start: 3; }
+  .row .offset-l3  { grid-column-start: 4; }
+  .row .offset-l4  { grid-column-start: 5; }
+  .row .offset-l5  { grid-column-start: 6; }
+  .row .offset-l6  { grid-column-start: 7; }
+  .row .offset-l7  { grid-column-start: 8; }
+  .row .offset-l8  { grid-column-start: 9; }
+  .row .offset-l9  { grid-column-start: 10; }
+  .row .offset-l10 { grid-column-start: 11; }
+  .row .offset-l11 { grid-column-start: 12; }
+}
+
+/* --- XL */
+@media only screen and (min-width: 1201px) {
+  .row .xl1  { grid-column: auto / span 1; }
+  .row .xl2  { grid-column: auto / span 2; }
+  .row .xl3  { grid-column: auto / span 3; }
+  .row .xl4  { grid-column: auto / span 4; }
+  .row .xl5  { grid-column: auto / span 5; }
+  .row .xl6  { grid-column: auto / span 6; }
+  .row .xl7  { grid-column: auto / span 7; }
+  .row .xl8  { grid-column: auto / span 8; }
+  .row .xl9  { grid-column: auto / span 9; }
+  .row .xl10 { grid-column: auto / span 10; }
+  .row .xl11 { grid-column: auto / span 11; }
+  .row .xl12 { grid-column: auto / span 12; }
+
+  .row .offset-xl1  { grid-column-start: 2; }
+  .row .offset-xl2  { grid-column-start: 3; }
+  .row .offset-xl3  { grid-column-start: 4; }
+  .row .offset-xl4  { grid-column-start: 5; }
+  .row .offset-xl5  { grid-column-start: 6; }
+  .row .offset-xl6  { grid-column-start: 7; }
+  .row .offset-xl7  { grid-column-start: 8; }
+  .row .offset-xl8  { grid-column-start: 9; }
+  .row .offset-xl9  { grid-column-start: 10; }
+  .row .offset-xl10 { grid-column-start: 11; }
+  .row .offset-xl11 { grid-column-start: 12; }
+}
+
+/* --- Gap */
+.g-0 { gap: 0; }
+.g-1 { gap: calc(0.25 * var(--gap-size)); }
+.g-2 { gap: calc(0.5 * var(--gap-size)); }
+.g-3 { gap: calc(1 * var(--gap-size)); }
+.g-4 { gap: calc(1.5 * var(--gap-size)); }
+.g-5 { gap: calc(3 * var(--gap-size)); }
+
+
+
+</style>

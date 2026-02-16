@@ -4,11 +4,12 @@ import corvo from "../../assets/img/icons/cuervo_vikingo.svg";
 import CarritoBtn from "../ui/CarritoBtn.astro";
 import MercarBtn from "../ui/MercarBtn.astro";
 import fondo from "../../assets/topbar-bg.png";
+import menuIcon from "../../assets/img/icons/menu_icon.svg";
 
 const pathname = Astro.url.pathname;
 ---
 
-<header class="header" style={`background-image: url(${fondo.src});`}>
+<header class="header hide-on-med-and-down" style={`background-image: url(${fondo.src});`}>
   <div class="container">
     <div class="header__row">
       <div class="header__logo">
@@ -54,6 +55,44 @@ const pathname = Astro.url.pathname;
     </div>
   </div>
 </header>
+
+<header class="header--mobile hide-on-med-and-up show-on-medium" style={`background-image: url(${fondo.src});`}>
+  <div class="header__container--mobile">
+    <img
+      class="header__img--mobile"
+      src={logo.src}
+      alt="Logo de Entradas Vivas"
+    />
+    <div class="header__buttons">
+      <button id="menuBtn" class="header__button-menu">
+        <img class="header__icon--menu" src={menuIcon.src} alt="Menú móvil" />
+      </button>
+    </div>
+  </div>
+
+  <nav id="menu" class="header__nav--mobile">
+    <a class={`header__a--mobile ${pathname === "/" ? "active" : ""}`} href="/"
+      >Inicio</a
+    >
+    <a
+      class={`header__a--mobile ${pathname === "/contacto" ? "active" : ""}`}
+      href="/contacto">Contacto</a
+    >
+          <div class="header__mercar header__button--form-mobile">
+        <MercarBtn />
+        <CarritoBtn />
+      </div>
+  </nav>
+</header>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("menuBtn")?.addEventListener("click", () => {
+      document.getElementById("menu")?.classList.toggle("show");
+    });
+  });
+</script>
 
 <style>
   .header {
@@ -144,5 +183,68 @@ const pathname = Astro.url.pathname;
     justify-content: center;
     align-items: center;
     gap: 1rem;
+  }
+
+   /* Header mobile */
+
+  .header--mobile {
+    padding: 30px;
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    background-size: cover;
+  }
+
+  .header__container--mobile {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0px;
+    border-bottom: 1px solid var(--text-secondary);
+  }
+
+  .header__img--mobile {
+    width: 87px;
+    height: 99px;
+  }
+
+  .header__button-menu{
+    background: transparent;
+    border: none;
+  }
+
+  .header__nav--mobile {
+    display: none;
+    flex-direction: column;
+    align-items: start;
+    gap: 1rem;
+    padding-top: 30px;
+    height: calc(100vh - 146px);
+  }
+
+  .header__a--mobile {
+    font-size: 2rem;
+    font-family: var(--font-secondary);
+    text-decoration: none;
+    line-height: 22px;
+    font-weight: 500;
+    color: var(--light);
+    padding: 15px 0px;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    width: 100%;
+  }
+
+  .header__button--form-mobile {
+    margin-top: 30px;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .active {
+    color: var(--main-color);
+  }
+
+  .show {
+    display: flex;
   }
 </style>

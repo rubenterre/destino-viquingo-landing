@@ -6,18 +6,23 @@ import TrailerBtn from "../ui/TrailerBtn.astro";
 import trenza from "../../assets/hero-trenza.svg";
 import titular from "../../assets/vectorizados/Unha_viaxe_ilustrada.svg";
 import fondo from "../../assets/img/Mapa_salnes_medieval.webp";
-/* import nieblaBottom from "../../assets/niebla_bottom.webp" */
+import nieblaTop from "../../assets/niebla_top.webp";
+import nieblaBottom from "../../assets/niebla_bottom.webp";
+
 ---
 
 <section class="presentation">
+      <div class="presentation-cloud">
+    <img src={nieblaTop.src} alt="Ornamento de niebla superior" />
+  </div>
   <div class="container">
     <div class="row">
-      <div class="col s6">
+      <div class="col s12 m6">
         <div class="presentation__video">
           <Trailer />
         </div>
       </div>
-      <div class="col s6">
+      <div class="col s12 m6">
         <div class="presentation__details">
           <div class="presentation__box">
             <h2 class="presentation__h2">PRESENTACIÓN</h2>
@@ -52,23 +57,24 @@ import fondo from "../../assets/img/Mapa_salnes_medieval.webp";
       </div>
     </div>
   </div>
+   <div class="hero-cloud hero-cloud--bottom">
+    <img src={nieblaBottom.src} alt="Ornamento de niebla inferior" />
+  </div>
 </section>
-
-<!-- <div class="ornament-cloud">
-		<img class="ornament-cloud__niebla" src={nieblaBottom.src} alt="Ornamento de niebla">
-</div> -->
 
 <style define:vars={{ bgFondo: `url(${fondo.src})` }}>
   .presentation {
     width: 100vw;
     min-height: 100vh;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    flex-direction: column;
     background: var(--bgFondo);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    position: relative;
   }
 
   .presentation__video {
@@ -113,6 +119,13 @@ import fondo from "../../assets/img/Mapa_salnes_medieval.webp";
     align-items: center;
     gap: 1rem;
     margin: 2rem 0px;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 414px) {
+    .presentation__buttons{
+        flex-direction: column;
+    }
   }
 
   .presentation__p {
@@ -121,8 +134,16 @@ import fondo from "../../assets/img/Mapa_salnes_medieval.webp";
     font-size: 0.8rem;
   }
 
-  /*   .ornament-cloud{
-    width: 100vw;
-  
-  } */
+/* Niebla top */
+
+.presentation-cloud img {
+  display: block;
+  width: 100%;
+  margin-bottom: -2rem; /* se mete hacia arriba para tocar el hero */
+}
+
+.hero-cloud--bottom img {
+  display: block;
+  width: 100%;
+}
 </style>

@@ -6,80 +6,105 @@ import trenza from "../../assets/hero-trenza.svg";
 import titular from "../../assets/vectorizados/Descobre_a_historia.svg";
 import libro from "../../assets/img/DestinoViquingo_mockup_libro.webp";
 import video from "../../assets/video/video_hero_destino_viquingo.mp4";
-import niebla from '../../assets/niebla.webp'
-
+import nieblaBottom from "../../assets/niebla_bottom.webp";
 ---
-    <video class="hero__video" autoplay muted loop>
-        <source src={video} type="video/mp4">
-    </video>
-<section class="hero">
-  <div class="container">
-    <div class="row">
-      <div class="col s6">
-        <div class="hero__details">
-          <img class="hero__trenza" src={trenza.src} alt="Ornamento viquingo" />
-          <img
-            class="hero__title"
-            src={titular.src}
-            alt="Titulo de Descobre a historia viquinga de Galicia"
-          />
-          <p class="hero__description">
-            Destino viquingo: a comarca do Salnés lévate a unha viaxe fascinante
-            a través das incursións viquingas en Galicia. Este libro non só che
-            conta a historia, senón que tamén te mergulla nela con ilustracións
-            detalladas e mapas explicativos.
-          </p>
 
-          <div class="hero__buttons">
-            <MercarBtn />
-            <TrailerBtn />
+<section class="hero">
+  <video class="hero__video" autoplay muted loop playsinline>
+    <source src={video} type="video/mp4" />
+  </video>
+  <div class="hero__content">
+    <div class="container">
+      <div class="row">
+        <div class="col s12 m12 l6">
+          <div class="hero__details">
+            <img
+              class="hero__trenza"
+              src={trenza.src}
+              alt="Ornamento viquingo"
+            />
+            <img
+              class="hero__title"
+              src={titular.src}
+              alt="Titulo de Descobre a historia viquinga de Galicia"
+            />
+            <p class="hero__description">
+              Destino viquingo: a comarca do Salnés lévate a unha viaxe
+              fascinante a través das incursións viquingas en Galicia. Este
+              libro non só che conta a historia, senón que tamén te mergulla
+              nela con ilustracións detalladas e mapas explicativos.
+            </p>
+
+            <div class="hero__buttons">
+              <MercarBtn />
+              <TrailerBtn />
+            </div>
+            <p class="hero__p">
+              Dispoñible xa para mercar en España (Península, Baleares e
+              Canarias)
+            </p>
           </div>
-          <p class="hero__p">
-            Dispoñible xa para mercar en España (Península, Baleares e Canarias)
-          </p>
         </div>
-      </div>
-      <div class="col s6">
-        <div class="hero__image">
-          <img
-            class="hero__libro-img"
-            src={libro.src}
-            alt="Imaxe do libro de Destino Viquingo"
-          />
+        <div class="col s12 m12 l6">
+          <div class="hero__image">
+            <img
+              class="hero__libro-img"
+              src={libro.src}
+              alt="Imaxe do libro de Destino Viquingo"
+            />
+          </div>
         </div>
       </div>
     </div>
   </div>
+ <div class="hero-cloud hero-cloud--bottom">
+    <img src={nieblaBottom.src} alt="Ornamento de niebla inferior" />
+  </div>
 </section>
-	<div class="ornament-cloud">
-		<img class="ornament-cloud__niebla" src={niebla.src} alt="Ornamento de niebla">
-	</div>
 
 <style>
-.hero {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  width: 100vw;
-  overflow: hidden;
-  background: linear-gradient( 135deg , rgba(11, 9, 7, 1) 15% , rgba(11, 9, 7, 0) 100% );
-}
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    background: linear-gradient(
+      135deg,
+      rgba(11, 9, 7, 1) 15%,
+      rgba(11, 9, 7, 0) 100%
+    );
+  }
 
-.hero__video {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  min-width: 100%;
-  min-height: 100%;
-  object-fit: cover;
-  z-index: -1;
-}
+  /* Vídeo como fondo responsive */
+  .hero__video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+  }
 
+  /* Contenido del hero */
+  .hero__content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    padding: 4rem 0 6rem;
+  }
 
-  .hero__details{
+  @media (max-width: 600px) {
+    .hero__content {
+      padding: 3rem 0 4rem;
+    }
+
+    .hero {
+      min-height: auto;
+    }
+  }
+
+  .hero__details {
     display: flex;
     justify-content: start;
     align-items: start;
@@ -89,47 +114,52 @@ import niebla from '../../assets/niebla.webp'
     margin-top: 2rem;
   }
 
-  .hero__trenza{
+  .hero__trenza {
     max-width: 100px;
   }
 
-  .hero__title{
+  .hero__title {
     max-width: 100%;
   }
 
-  .hero__description{
+  .hero__description {
     font-family: var(--font-primary);
     font-size: 1rem;
     color: var(--text-color-texto-principal);
   }
 
-  .hero__buttons{
+  .hero__buttons {
     display: flex;
     justify-content: start;
     align-items: center;
+    flex-wrap: wrap;
     gap: 1rem;
     margin: 2rem 0px;
   }
 
-  .hero__p{
+    @media (max-width: 414px) {
+    .hero__buttons{
+        flex-direction: column;
+    }
+  }
+
+  .hero__p {
     font-family: var(--font-primary);
     color: var(--text-color-texto-principal);
-    font-size: .8rem;
+    font-size: 0.8rem;
   }
 
-  .hero__image{
+  .hero__image {
     width: 100%;
   }
 
-
-  .hero__libro-img{
+  .hero__libro-img {
     width: 100%;
   }
-
 
   /* Niebla de ornamento */
 
-  .ornament-cloud{
+  /*  .ornament-cloud{
   width: 100vw;
   display: block;
   margin-top: -220px;
@@ -138,6 +168,16 @@ import niebla from '../../assets/niebla.webp'
 }
 
 .ornament-cloud__niebla{
+  width: 100%;
+} */
+
+  /* Niebla */
+/* .hero-cloud--bottom {
+  margin-top: -3rem;
+} */
+
+.hero-cloud--bottom img {
+  display: block;
   width: 100%;
 }
 </style>

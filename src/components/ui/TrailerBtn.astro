@@ -21,10 +21,16 @@ import fondo from '../../assets/topbar-trailer-btn.svg'
     color: var(--gold);
     font-family: var(--font-secondary);
     min-width: 200px;
-    height: 37px;
+    min-height: 37px;
   }
 
   .mercar__button:hover{
     filter:brightness(70%);
+  }
+
+  @media (max-width:414px ){
+    .mercar__button {
+      min-width: 100%;
+    }
   }
 </style>

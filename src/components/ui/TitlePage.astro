@@ -1,0 +1,54 @@
+---
+const { titular, alt, subtitular } = Astro.props;
+import fondo from '../../assets/img/hero/hero_contact_pages.webp'
+---
+
+<div class="titular__header">
+    <div class="titular__container">
+<img class="titular__img" src={titular} alt={alt}>
+  <p class="titular__p">
+    {subtitular}
+  </p>
+    </div>
+  
+</div>
+
+<style define:vars={{bgFondo: `url(${fondo.src})`}}>
+  .titular__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 5rem 0px;
+    width: 100%;
+    max-height: 452px;
+    margin: 0 auto;
+    background: var(--bgFondo);
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .titular__container{
+    max-width: 200px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .titular__img {
+    margin: 0 auto;
+    height: 92px;
+    width: 100%;
+  }
+
+  .titular__p {
+    font-family: var(--font-primary);
+    font-size: 1.2ch;
+    font-weight: 400;
+    color: var(--text-color-texto-secundario);
+    text-align: center;
+    line-height: 1.7rem;
+  }
+</style>

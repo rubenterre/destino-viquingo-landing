@@ -1,0 +1,571 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/layout/Header.astro";
+import Footer from "../../components/layout/Footer.astro";
+---
+
+<Layout title="Checkout">
+  <Header />
+
+  <main class="checkout">
+    <section class="checkout__container">
+      <h1 class="checkout__title">Finalizar compra</h1>
+
+      <div class="checkout__grid">
+        <!-- Resumen carrito -->
+        <section class="checkout__cart">
+          <p class="checkout__kicker">Resumo</p>
+          <h2 class="checkout__subtitle">O teu pedido</h2>
+
+          <div class="checkout__cart-items" id="cart-items"></div>
+
+          <div class="checkout__cart-footer">
+            <button class="checkout__clear-btn" id="clear-cart">
+              Baleirar carrito
+            </button>
+
+            <div class="checkout__totals">
+              <div class="checkout__totals-row">
+                <span>Subtotal</span>
+                <span id="cart-subtotal">0,00 €</span>
+              </div>
+              <div class="checkout__totals-row checkout__totals-row--strong">
+                <span>Total</span>
+                <span id="cart-total">0,00 €</span>
+              </div>
+              <p class="checkout__small">
+                IVE incluído. Gastos de envío calculados por o transportista.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Paso Stripe -->
+        <section class="checkout__payment">
+          <p class="checkout__kicker">Paso final</p>
+          <h2 class="checkout__subtitle">Confirmar e pagar</h2>
+
+          <p class="checkout__text">
+            No seguinte paso serás redirixido á páxina segura de Stripe para
+            introducir o teu correo, dirección de envío e datos de pago.
+          </p>
+
+          <div class="checkout__stripe-box">
+            <button id="checkout-pay-button" class="checkout__pay-button checkout__pay-btn">
+              Ir a pagar con tarjeta
+            </button>
+            <p class="checkout__secure">
+              Pagos seguros con Stripe. Non gardamos os datos da túa tarxeta.
+            </p>
+          </div>
+
+          <a href="/mercar" class="checkout__back-link"> ← Seguir mercando </a>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script is:inline>
+  if (typeof window !== "undefined") {
+    const CART_KEY = "dv_cart";
+
+    const itemsContainer = document.getElementById("cart-items");
+    const clearBtn = document.getElementById("clear-cart");
+    const subtotalEl = document.getElementById("cart-subtotal");
+    const totalEl = document.getElementById("cart-total");
+
+    const formatPrice = (cents) =>
+      (cents / 100).toFixed(2).replace(".", ",") + " €";
+
+    const getCart = () => {
+      const raw = window.localStorage.getItem(CART_KEY);
+      return raw ? JSON.parse(raw) : {};
+    };
+
+    const saveCart = (cart) => {
+      window.localStorage.setItem(CART_KEY, JSON.stringify(cart));
+      window.dispatchEvent(
+        new CustomEvent("dv:cart-updated", { detail: cart }),
+      );
+    };
+
+    const renderCart = () => {
+      const cart = getCart();
+      itemsContainer.innerHTML = "";
+
+      const entries = Object.values(cart);
+
+      if (!entries.length) {
+        itemsContainer.innerHTML =
+          '<p class="checkout__empty">O teu carrito está baleiro.</p>';
+        subtotalEl.textContent = "0,00 €";
+        totalEl.textContent = "0,00 €";
+        return;
+      }
+
+      let subtotal = 0;
+
+      for (const item of entries) {
+        const lineTotal = item.price * item.quantity;
+        subtotal += lineTotal;
+
+        const row = document.createElement("div");
+        row.className = "checkout__item";
+        row.dataset.id = item.id;
+
+        row.innerHTML = `
+<div class="checkout__item-info">
+
+    <div class="checkout__item-text">
+      <p class="checkout__item-name">${item.name}</p>
+      <p class="checkout__item-price">${formatPrice(item.price)}</p>
+    </div>
+  </div>
+          <div class="checkout__item-actions">
+            <button class="checkout__qty-btn" data-action="decrease">-</button>
+            <span class="checkout__item-qty">${item.quantity}</span>
+            <button class="checkout__qty-btn" data-action="increase">+</button>
+            <button class="checkout__remove-btn" data-action="remove">✕</button>
+          </div>
+          <div class="checkout__item-total">
+            ${formatPrice(lineTotal)}
+          </div>
+          <style>
+            .checkout__item-info {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                }
+
+                .checkout__item-image {
+                width: 64px;
+                height: 64px;
+                object-fit: cover;
+                border-radius: 0.5rem;
+                flex-shrink: 0;
+                }
+
+                .checkout__item-text {
+                display: flex;
+                flex-direction: column;
+                gap: 0.25rem;
+                }
+
+            .checkout__item-name {
+                font-weight: 500;
+                margin-bottom: 0.3rem;
+                }
+
+                .checkout__item-price {
+                font-size: 0.85rem;
+                color: var(--text-color-secundario, #cbd5f5);
+                margin-bottom: 2rem;
+                }
+
+                .checkout__item-actions {
+                display: flex;
+                align-items: center;
+                gap: .7rem;
+                }
+
+                .checkout__qty-btn,
+                .checkout__remove-btn {
+                border: none;
+                cursor: pointer;
+                background: var(--theme-color-fondo-principal);
+                color: #e5e7eb;
+                width: 36px;
+                height: 36px;
+                border-radius: 999px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 0.8rem;
+                }
+
+                .checkout__remove-btn {
+                background: transparent;
+                color: #fca5a5;
+                }
+                .checkout__item-total {
+                font-weight: 500;
+                margin-top: .8rem;
+                
+                }
+          </style>  
+        `;
+
+        itemsContainer.appendChild(row);
+      }
+
+      subtotalEl.textContent = formatPrice(subtotal);
+      totalEl.textContent = formatPrice(subtotal); // de momento sen gastos nin impostos extra
+    };
+
+    // Delegación de eventos para +, -, eliminar
+    itemsContainer.addEventListener("click", (event) => {
+      const btn = event.target;
+      const action = btn.dataset.action;
+      if (!action) return;
+
+      const row = btn.closest(".checkout__item");
+      const id = row?.dataset.id;
+      if (!id) return;
+
+      const cart = getCart();
+      const item = cart[id];
+      if (!item) return;
+
+      if (action === "increase") {
+        item.quantity += 1;
+      } else if (action === "decrease") {
+        item.quantity = Math.max(1, item.quantity - 1);
+      } else if (action === "remove") {
+        delete cart[id];
+      }
+
+      saveCart(cart);
+      renderCart();
+    });
+
+    // Vaciar carrito
+    clearBtn.addEventListener("click", () => {
+      window.localStorage.removeItem(CART_KEY);
+      window.dispatchEvent(new CustomEvent("dv:cart-updated", { detail: {} }));
+      renderCart();
+    });
+
+    // Render inicial
+    renderCart();
+  }
+
+  if (typeof window !== "undefined") {
+    const CART_KEY = "dv_cart";
+    const payBtn = document.getElementById("stripe-checkout-btn");
+
+    const getCart = () => {
+      const raw = window.localStorage.getItem(CART_KEY);
+      return raw ? JSON.parse(raw) : {};
+    };
+
+    const goToStripeCheckout = async () => {
+      const cart = getCart();
+
+      if (!Object.keys(cart).length) {
+        alert("O teu carrito está baleiro.");
+        return;
+      }
+
+      const res = await fetch("/api/create-checkout-session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ cart }),
+      });
+
+      if (!res.ok) {
+        alert("Houbo un problema ao conectar con Stripe. Téntao de novo.");
+        return;
+      }
+
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        alert("Non se puido iniciar o pago.");
+      }
+    };
+
+    if (payBtn) {
+      payBtn.addEventListener("click", goToStripeCheckout);
+    }
+
+   // Botón de pagar con Stripe
+  const payButton = document.querySelector('#checkout-pay-button');
+
+  if (payButton) {
+    payButton.addEventListener('click', async () => {
+      // Usa la misma función que ya tienes para leer el carrito
+      const cart = getCart();
+
+      if (!cart || Object.keys(cart).length === 0) {
+        alert('O teu carrito está baleiro.');
+        return;
+      }
+
+      try {
+        const response = await fetch('/api/create-checkout-session', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ cart }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.url) {
+          window.location.href = data.url;
+        } else {
+          console.error('Erro creando sesión de pago', data);
+          alert('Houbo un erro ao crear a sesión de pago. Téntao de novo.');
+        }
+      } catch (err) {
+        console.error('Erro de rede ao chamar a Stripe', err);
+        alert('Non se puido conectar coa pasarela de pago. Revisa a túa conexión.');
+      }
+    });
+  }
+  }
+
+
+</script>
+
+<style>
+  .checkout {
+    min-height: 100vh;
+    background: radial-gradient(circle at top, #050814 0, #020308 55%);
+    color: var(--text-color-texto-principal);
+  }
+
+  .checkout__container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 4rem 1.5rem 3.5rem;
+  }
+
+  .checkout__title {
+    font-size: clamp(1.9rem, 2.5vw, 2.6rem);
+    letter-spacing: -0.03em;
+    margin-bottom: 2.3rem;
+    font-family: var(--font-secondary);
+  }
+
+  .checkout__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2.2fr);
+    gap: 2.25rem;
+  }
+
+  .checkout__cart,
+  .checkout__payment {
+    background: rgba(15, 23, 42, 0.9);
+    border-radius: 1.1rem;
+    padding: 1.75rem 1.6rem;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(148, 163, 184, 0.3);
+  }
+
+  .checkout__kicker {
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.7rem;
+    color: var(--gold, #fbbf24);
+    margin-bottom: 0.4rem;
+  }
+
+  .checkout__subtitle {
+    font-size: 1.05rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    font-family: var(--font-secondary);
+  }
+
+  .checkout__cart-items {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .checkout__empty {
+    font-size: 0.9rem;
+    color: var(--text-color-secundario, #cbd5f5);
+  }
+
+  .checkout__item {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) auto auto;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .checkout__item-name {
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+  }
+
+  .checkout__item-price {
+    font-size: 0.85rem;
+    color: var(--text-color-secundario, #cbd5f5);
+  }
+
+  .checkout__item-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .checkout__qty-btn,
+  .checkout__remove-btn {
+    border: none;
+    cursor: pointer;
+    background: var(--theme-color-fondo-principal);
+    color: #e5e7eb;
+    width: 36px;
+    height: 36px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+  }
+
+  .checkout__remove-btn {
+    background: transparent;
+    color: #fca5a5;
+  }
+
+  .checkout__item-qty {
+    min-width: 20px;
+    text-align: center;
+    font-size: 0.9rem;
+  }
+
+  .checkout__item-total {
+    font-weight: 500;
+    text-align: right;
+    margin-top: 0.5rem;
+  }
+
+  /* Footer del carrito */
+
+  .checkout__cart-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 1rem;
+  }
+
+  .checkout__clear-btn {
+    border: none;
+    background: transparent;
+    color: #fca5a5;
+    font-size: 0.8rem;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  .checkout__totals {
+    min-width: 180px;
+    font-size: 0.9rem;
+  }
+
+  .checkout__totals-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.25rem;
+  }
+
+  .checkout__totals-row--strong {
+    font-weight: 600;
+  }
+
+  .checkout__small {
+    margin-top: 0.3rem;
+    font-size: 0.75rem;
+    color: var(--text-color-secundario, #cbd5f5);
+  }
+
+  /* Columna Stripe */
+
+  .checkout__payment {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .checkout__text {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--text-color-secundario, #cbd5f5);
+  }
+
+  .checkout__stripe-box {
+    margin-top: 0.5rem;
+    padding: 1.4rem 1.3rem;
+    border-radius: 0.9rem;
+    background: radial-gradient(
+      circle at top,
+      rgba(15, 23, 42, 0.98),
+      rgba(15, 23, 42, 0.9)
+    );
+    box-shadow: 0 16px 38px rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(148, 163, 184, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+
+  .checkout__pay-btn {
+    padding: 0.9rem 2.2rem;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-primary);
+    letter-spacing: 0.12em;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    color: #f0fdf4;
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.7);
+    transition:
+      transform 0.15s ease,
+      box-shadow 0.15s ease,
+      filter 0.15s ease;
+  }
+
+  .checkout__pay-btn:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.05);
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.9);
+  }
+
+  .checkout__secure {
+    font-size: 0.8rem;
+    color: var(--text-color-secundario, #cbd5f5);
+    text-align: center;
+  }
+
+  .checkout__back-link {
+    margin-top: 0.75rem;
+    font-size: 0.8rem;
+    color: var(--text-color-secundario, #cbd5f5);
+    text-decoration: underline;
+  }
+
+  /* Responsive */
+
+  @media (max-width: 768px) {
+    .checkout__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .checkout__cart-footer {
+      flex-direction: column-reverse;
+      align-items: flex-start;
+    }
+
+    .checkout__totals {
+      width: 100%;
+    }
+
+    .checkout__payment {
+      order: -1; /* si quieres mostrar primero Stripe en móvil, opcional */
+    }
+  }
+</style>

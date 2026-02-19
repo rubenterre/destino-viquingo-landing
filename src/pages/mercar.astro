@@ -1,0 +1,209 @@
+---
+import Layout from '../layouts/Layout.astro'; 
+import libro from '../assets/img/DestinoViquingo_mockup_libro.webp';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+
+const PRODUCT = {
+  id: 'destino-viquingo-libro',
+  name: 'Destino Viquingo: a comarca do Salnés',
+  price: 13_99,             
+  displayPrice: '13,99 €'
+};
+---
+
+<Layout title="Mercar o libro">
+    <Header/>
+  <main class="buy-page">
+    <section class="buy-hero">
+      <div class="container row">
+        <div class="col s12 m6">
+          <div class="buy-hero__media">
+            <img
+              src={libro.src}
+              alt="Portada do libro Destino Viquingo"
+              class="buy-hero__image"
+            />
+          </div>
+        </div>
+
+        <div class="col s12 m6">
+          <div class="buy-hero__details">
+            <p class="buy-hero__kicker">Edición ilustrada</p>
+            <h1 class="buy-hero__title">
+              Destino Viquingo: a comarca do Salnés
+            </h1>
+            <p class="buy-hero__subtitle">
+              Libro en tapa branda, 200 páxinas, ilustracións orixinais e mapas
+              das incursións viquingas en Galicia.
+            </p>
+
+            <div class="buy-hero__price-row">
+              <span class="buy-hero__price">{PRODUCT.displayPrice}</span>
+              <span class="buy-hero__taxes">IVE incluído</span>
+            </div>
+
+            <button
+              class="buy-hero__btn"
+              type="button"
+              data-product-id={PRODUCT.id}
+            >
+              Engadir ao carrito
+            </button>
+
+            <p class="buy-hero__info">
+              Envíos a España (Península, Baleares e Canarias). Preparación do
+              pedido en 24-48h laborables.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer/>
+</Layout>
+
+<script type="module">
+  if (typeof window !== 'undefined') {
+    window.addEventListener('DOMContentLoaded', () => {
+      const button = document.querySelector('.buy-hero__btn');
+      const CART_KEY = 'dv_cart';
+
+      if (!button) {
+        console.warn('No se encontró .buy-hero__btn');
+        return;
+      }
+
+      const addToCart = () => {
+        const productId = button.dataset.productId;
+
+        const raw = window.localStorage.getItem(CART_KEY);
+        const cart = raw ? JSON.parse(raw) : {};
+        const currentQty = cart[productId]?.quantity ?? 0;
+
+        cart[productId] = {
+          id: productId,
+          name: 'Destino Viquingo: a comarca do Salnés',
+          price: 13_99,
+          quantity: currentQty + 1,
+        };
+
+        window.localStorage.setItem(CART_KEY, JSON.stringify(cart));
+        window.dispatchEvent(
+          new CustomEvent('dv:cart-updated', { detail: cart })
+        );
+      };
+
+      button.addEventListener('click', addToCart);
+    });
+  }
+</script>
+
+
+<style>
+  .buy-page {
+    min-height: 100vh;
+    background: radial-gradient(circle at top, #050814 0, #020308 55%);
+    color: var(--text-color-texto-principal);
+  }
+
+  .buy-hero {
+    padding: 5rem 0 4rem;
+  }
+
+  .buy-hero__media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .buy-hero__image {
+    max-width: 360px;
+    width: 100%;
+    filter: drop-shadow(0 24px 60px rgba(0, 0, 0, 0.7));
+  }
+
+  .buy-hero__details {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .buy-hero__kicker {
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.75rem;
+    color: var(--gold, #fbbf24);
+  }
+
+  .buy-hero__title {
+    font-size: clamp(1.9rem, 2.4vw, 2.6rem);
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+  }
+
+  .buy-hero__subtitle {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--text-color-texto-secundario, #cbd5f5);
+  }
+
+  .buy-hero__price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+  }
+
+  .buy-hero__price {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--gold, #fbbf24);
+  }
+
+  .buy-hero__taxes {
+    font-size: 0.8rem;
+    opacity: 0.8;
+  }
+
+  .buy-hero__btn {
+    margin-top: 1rem;
+    padding: 0.9rem 2.5rem;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-primary);
+    letter-spacing: 0.12em;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, #b45309, #f97316);
+    color: #fefce8;
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.7);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+  }
+
+  .buy-hero__btn:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.05);
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.9);
+  }
+
+  .buy-hero__info {
+    font-size: 0.8rem;
+    color: var(--text-color-texto-secundario, #cbd5f5);
+    max-width: 28rem;
+  }
+
+  @media (max-width: 768px) {
+    .buy-hero {
+      padding: 3.5rem 0 3rem;
+    }
+
+    .buy-hero__details {
+      margin-top: 2rem;
+    }
+
+    .buy-hero__media {
+      justify-content: center;
+    }
+  }
+</style>

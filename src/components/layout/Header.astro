@@ -95,6 +95,32 @@ const pathname = Astro.url.pathname;
     });
   });
 </script>
+<script type="module">
+  if (typeof window !== 'undefined') {
+    const badge = document.querySelector('.cart-badge');
+    const CART_KEY = 'dv_cart';
+
+    const updateCartBadge = () => {
+      const raw = window.localStorage.getItem(CART_KEY);
+      if (!badge) return;
+
+      if (!raw) {
+        badge.textContent = '0';
+        return;
+      }
+      const cart = JSON.parse(raw);
+      const total = Object.values(cart).reduce(
+        (sum, item) => sum + (item.quantity ?? 0),
+        0
+      );
+      badge.textContent = String(total);
+    };
+
+    updateCartBadge();
+    window.addEventListener('dv:cart-updated', updateCartBadge);
+  }
+</script>
+
 
 <style>
   .header {

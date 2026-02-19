@@ -1,27 +1,90 @@
 ---
-import fondo from '../../assets/carrito_btn.svg'
+import fondo from '../../assets/carrito_btn.svg';
+const CART_KEY = 'dv_cart';
 ---
 
-<a href="/mercar" class="mercar__button">
-  <img class="mercar__img" src={fondo.src} alt="Icono de carrito de compras" />
-</a>
+<button
+  class="mercar__button"
+  type="button"
+  onclick="window.location.href='/checkout'"
+>
+  <img
+    class="mercar__img"
+    src={fondo.src}
+    alt="Icono de carrito de compras"
+  />
+  <span class="cart-btn__badge cart-badge">0</span>
+</button>
+
+<script is:inline>
+  if (typeof window !== 'undefined') {
+    const CART_KEY = 'dv_cart';
+
+    // Localiza el botón asociado a ESTE script
+    const thisScript = document.currentScript;
+    const button = thisScript?.previousElementSibling; // el <button> justo antes
+    const badge = button?.querySelector('.cart-badge');
+
+    const updateCartBadge = () => {
+      if (!badge) return;
+
+      const raw = window.localStorage.getItem(CART_KEY);
+      if (!raw) {
+        badge.textContent = '0';
+        return;
+      }
+
+      const cart = JSON.parse(raw);
+      const total = Object.values(cart).reduce(
+        (sum, item) => sum + (item.quantity ?? 0),
+        0
+      );
+      badge.textContent = String(total);
+    };
+
+    // Inicializar al cargar
+    updateCartBadge();
+
+    // Escuchar actualizaciones del carrito
+    window.addEventListener('dv:cart-updated', updateCartBadge);
+  }
+</script>
 
 <style>
   .mercar__button {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
     text-decoration: none;
     padding: 5px 15px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
   }
 
-  .mercar__button:hover{
-        filter:brightness(70%);
-
+  .mercar__button:hover {
+    filter: brightness(70%);
   }
 
-  .mercar__img{
+  .mercar__img {
     max-width: 70px;
+  }
+
+  .cart-btn__badge {
+    position: absolute;
+    top: -6px;
+    right: -10px;
+    min-width: 18px;
+    height: 18px;
+    border-radius: 999px;
+    background: var(--theme-color-acento, #f97316);
+    color: #fff;
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
   }
 </style>

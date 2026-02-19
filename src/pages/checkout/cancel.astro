@@ -1,0 +1,218 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/layout/Header.astro";
+import Footer from "../../components/layout/Footer.astro";
+import video from "../../assets/video/video_fondo_success_v2_18022026.mp4"; // puedes usar el mismo o uno más oscuro
+---
+
+<Layout title="Pago cancelado">
+  <Header />
+  <section class="cancel">
+    <video class="cancel__video" autoplay muted loop playsinline>
+      <source src={video} type="video/mp4" />
+    </video>
+    <main class="cancel-page">
+      <section class="cancel-card">
+        <p class="cancel-kicker">Pago cancelado</p>
+        <h1 class="cancel-title">O pago foi cancelado</h1>
+        <h3 class="cancel__h3">Non se realizou ningún cargo</h3>
+
+        <p class="cancel-text">
+          O proceso de pago con Stripe foi interrompido, polo que o teu pedido
+          non se completou.
+        </p>
+        <p class="cancel-text">
+          Se foi un erro, podes volver ao checkout e intentalo de novo en
+          calquera momento.
+        </p>
+
+        <div class="cancel-actions">
+          <a href="/checkout" class="cancel-btn cancel-btn--primary">
+            Volver ao checkout
+          </a>
+          <a href="/contacto" class="cancel-btn cancel-btn--ghost">
+            Necesitas axuda?
+          </a>
+        </div>
+
+        <p class="cancel-note">
+          Se tes dúbidas sobre o estado do pago ou queres confirmar se se
+          realizou algún cargo, escríbenos a
+          <span class="cancel-highlight">info@rubenterre.com</span>.
+        </p>
+      </section>
+    </main>
+  </section>
+  <Footer />
+</Layout>
+
+<style>
+  .cancel {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    background: linear-gradient(
+      135deg,
+      rgba(11, 9, 7, 1) 15%,
+      rgba(11, 9, 7, 0) 100%
+    );
+  }
+
+  .cancel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      circle at top,
+      rgba(0, 0, 0, 0.6),
+      rgba(0, 0, 0, 0.95)
+    );
+    z-index: -0.5;
+  }
+
+  .cancel__video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+  }
+
+  .cancel-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 1.5rem 3rem;
+    color: var(--text-color-texto-principal);
+     z-index: 50;
+ position: relative;
+  }
+
+  .cancel-card {
+    width: 100%;
+    max-width: 640px;
+    background-color: var(--theme-color-fondo-principal);
+    border-radius: 1.25rem;
+    padding: 2.5rem 2.25rem;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(148, 163, 184, 0.35);
+  }
+
+  .cancel-kicker {
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.75rem;
+    color: #f97373; /* tono aviso suave */
+    margin-bottom: 0.75rem;
+  }
+
+  .cancel-title {
+    font-size: clamp(1.9rem, 2.3vw, 2.4rem);
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    font-family: var(--font-secondary);
+  }
+
+  .cancel__h3 {
+    font-size: clamp(1.2rem, 1.9vw, 1.8rem);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    font-family: var(--font-secondary);
+    color: var(--text-color-secundario, #cbd5f5);
+  }
+
+  .cancel-text {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--text-color-secundario, #cbd5f5);
+    margin-bottom: 0.75rem;
+    font-family: var(--font-primary);
+  }
+
+  .cancel-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 1.75rem 0 1.25rem;
+  }
+
+  .cancel-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem 1.8rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-family: var(--font-primary);
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition:
+      transform 0.15s ease,
+      box-shadow 0.15s ease,
+      filter 0.15s ease,
+      background 0.15s ease,
+      color 0.15s ease;
+  }
+
+  .cancel-btn--primary {
+    background: linear-gradient(135deg, #4b5563, #9ca3af);
+    color: #f9fafb;
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.7);
+  }
+
+  .cancel-btn--primary:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.05);
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.9);
+  }
+
+  .cancel-btn--ghost {
+    background: transparent;
+    color: var(--text-color-secundario, #cbd5f5);
+    border-color: rgba(148, 163, 184, 0.6);
+  }
+
+  .cancel-btn--ghost:hover {
+    background: rgba(15, 23, 42, 0.8);
+    color: var(--gold, #fbbf24);
+  }
+
+  .cancel-note {
+    font-size: 0.8rem;
+    color: #9ca3af;
+    font-family: var(--font-primary);
+  }
+
+  .cancel-highlight {
+    color: var(--gold, #fbbf24);
+    font-weight: 500;
+  }
+
+  @media (max-width: 640px) {
+    .cancel-page {
+      min-height: auto;
+      padding: 3rem 1.5rem 2.5rem;
+    }
+
+    .cancel-card {
+      padding: 2rem 1.5rem;
+    }
+
+    .cancel-actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .cancel-btn {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>

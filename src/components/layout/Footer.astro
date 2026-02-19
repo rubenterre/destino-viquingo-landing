@@ -4,6 +4,7 @@ import instagramIcon from "../../assets/img/icons/social/instagram_icon_social.w
 import linkedinIcon from "../../assets/img/icons/social/linkedin_icon_social.webp";
 import behanceIcon from "../../assets/img/icons/social/behance_icon_social.webp";
 import corvo from "../../assets/img/icons/cuervo_vikingo.svg";
+import fondoTop from "../../assets/topbar-bg-top.webp";
 ---
 
 <footer class="footer">
@@ -115,12 +116,17 @@ import corvo from "../../assets/img/icons/cuervo_vikingo.svg";
   </div>
 </footer>
 
-<style>
+<style define:vars={{bgFondo: `url(${fondoTop.src})`}}>
   .footer {
-    background: var(--card-bg);
-    color: var(--light);
+    background-color: #040201;
+    color: var(--text-color-texto-primario);
     padding: 3rem 0 2rem;
     font-family: var(--font-secondary);
+    background-image: var(--bgFondo);
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: contain;
+    width: 100vw;
   }
 
   .footer__top {

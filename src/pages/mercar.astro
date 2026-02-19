@@ -92,6 +92,9 @@ const PRODUCT = {
         window.dispatchEvent(
           new CustomEvent('dv:cart-updated', { detail: cart })
         );
+
+          // 3. Redirixir directamente ao checkout
+     window.location.href = '/checkout';
       };
 
       button.addEventListener('click', addToCart);

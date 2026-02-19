@@ -34,7 +34,7 @@ import Footer from "../../components/layout/Footer.astro";
                 <span id="cart-total">0,00 €</span>
               </div>
               <p class="checkout__small">
-                IVE incluído. Gastos de envío calculados por o transportista.
+                IVE incluído. Gastos de envío calculados polo transportista no momento do pago.
               </p>
             </div>
           </div>
@@ -51,7 +51,10 @@ import Footer from "../../components/layout/Footer.astro";
           </p>
 
           <div class="checkout__stripe-box">
-            <button id="checkout-pay-button" class="checkout__pay-button checkout__pay-btn">
+            <button
+              id="checkout-pay-button"
+              class="checkout__pay-button checkout__pay-btn"
+            >
               Ir a pagar con tarjeta
             </button>
             <p class="checkout__secure">
@@ -100,7 +103,7 @@ import Footer from "../../components/layout/Footer.astro";
 
       if (!entries.length) {
         itemsContainer.innerHTML =
-          '<p class="checkout__empty">O teu carrito está baleiro.</p>';
+          '<p class="checkout__empty">O teu carrito está baleiro.</p><a class="checkout__back-link" href="/">Volver ao inicio</a>';
         subtotalEl.textContent = "0,00 €";
         totalEl.textContent = "0,00 €";
         return;
@@ -128,74 +131,12 @@ import Footer from "../../components/layout/Footer.astro";
             <button class="checkout__qty-btn" data-action="decrease">-</button>
             <span class="checkout__item-qty">${item.quantity}</span>
             <button class="checkout__qty-btn" data-action="increase">+</button>
-            <button class="checkout__remove-btn" data-action="remove">✕</button>
+       
           </div>
           <div class="checkout__item-total">
             ${formatPrice(lineTotal)}
           </div>
-          <style>
-            .checkout__item-info {
-                display: flex;
-                align-items: center;
-                gap: 1rem;
-                }
-
-                .checkout__item-image {
-                width: 64px;
-                height: 64px;
-                object-fit: cover;
-                border-radius: 0.5rem;
-                flex-shrink: 0;
-                }
-
-                .checkout__item-text {
-                display: flex;
-                flex-direction: column;
-                gap: 0.25rem;
-                }
-
-            .checkout__item-name {
-                font-weight: 500;
-                margin-bottom: 0.3rem;
-                }
-
-                .checkout__item-price {
-                font-size: 0.85rem;
-                color: var(--text-color-secundario, #cbd5f5);
-                margin-bottom: 2rem;
-                }
-
-                .checkout__item-actions {
-                display: flex;
-                align-items: center;
-                gap: .7rem;
-                }
-
-                .checkout__qty-btn,
-                .checkout__remove-btn {
-                border: none;
-                cursor: pointer;
-                background: var(--theme-color-fondo-principal);
-                color: #e5e7eb;
-                width: 36px;
-                height: 36px;
-                border-radius: 999px;
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 0.8rem;
-                }
-
-                .checkout__remove-btn {
-                background: transparent;
-                color: #fca5a5;
-                }
-                .checkout__item-total {
-                font-weight: 500;
-                margin-top: .8rem;
-                
-                }
-          </style>  
+         
         `;
 
         itemsContainer.appendChild(row);
@@ -282,46 +223,46 @@ import Footer from "../../components/layout/Footer.astro";
       payBtn.addEventListener("click", goToStripeCheckout);
     }
 
-   // Botón de pagar con Stripe
-  const payButton = document.querySelector('#checkout-pay-button');
+    // Botón de pagar con Stripe
+    const payButton = document.querySelector("#checkout-pay-button");
 
-  if (payButton) {
-    payButton.addEventListener('click', async () => {
-      // Usa la misma función que ya tienes para leer el carrito
-      const cart = getCart();
+    if (payButton) {
+      payButton.addEventListener("click", async () => {
+        // Usa la misma función que ya tienes para leer el carrito
+        const cart = getCart();
 
-      if (!cart || Object.keys(cart).length === 0) {
-        alert('O teu carrito está baleiro.');
-        return;
-      }
-
-      try {
-        const response = await fetch('/api/create-checkout-session', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ cart }),
-        });
-
-        const data = await response.json();
-
-        if (response.ok && data.url) {
-          window.location.href = data.url;
-        } else {
-          console.error('Erro creando sesión de pago', data);
-          alert('Houbo un erro ao crear a sesión de pago. Téntao de novo.');
+        if (!cart || Object.keys(cart).length === 0) {
+          alert("O teu carrito está baleiro.");
+          return;
         }
-      } catch (err) {
-        console.error('Erro de rede ao chamar a Stripe', err);
-        alert('Non se puido conectar coa pasarela de pago. Revisa a túa conexión.');
-      }
-    });
-  }
-  }
 
+        try {
+          const response = await fetch("/api/create-checkout-session", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ cart }),
+          });
 
+          const data = await response.json();
+
+          if (response.ok && data.url) {
+            window.location.href = data.url;
+          } else {
+            console.error("Erro creando sesión de pago", data);
+            alert("Houbo un erro ao crear a sesión de pago. Téntao de novo.");
+          }
+        } catch (err) {
+          console.error("Erro de rede ao chamar a Stripe", err);
+          alert(
+            "Non se puido conectar coa pasarela de pago. Revisa a túa conexión.",
+          );
+        }
+      });
+    }
+  }
 </script>
 
-<style>
+<style is:global>
   .checkout {
     min-height: 100vh;
     background: radial-gradient(circle at top, #050814 0, #020308 55%);
@@ -391,6 +332,26 @@ import Footer from "../../components/layout/Footer.astro";
     gap: 1rem;
   }
 
+  .checkout__item-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .checkout__item-image {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .checkout__item-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
   .checkout__item-name {
     font-weight: 500;
     margin-bottom: 0.3rem;
@@ -404,7 +365,7 @@ import Footer from "../../components/layout/Footer.astro";
   .checkout__item-actions {
     display: flex;
     align-items: center;
-    gap: 0.4rem;
+    gap: 0.7rem;
   }
 
   .checkout__qty-btn,
@@ -426,17 +387,8 @@ import Footer from "../../components/layout/Footer.astro";
     background: transparent;
     color: #fca5a5;
   }
-
-  .checkout__item-qty {
-    min-width: 20px;
-    text-align: center;
-    font-size: 0.9rem;
-  }
-
   .checkout__item-total {
     font-weight: 500;
-    text-align: right;
-    margin-top: 0.5rem;
   }
 
   /* Footer del carrito */
@@ -508,7 +460,6 @@ import Footer from "../../components/layout/Footer.astro";
     align-items: center;
     gap: 0.75rem;
   }
-
 
   .checkout__pay-btn {
     padding: 0.9rem 2.2rem;

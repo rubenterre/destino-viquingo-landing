@@ -6,20 +6,23 @@ const stripe = new Stripe(import.meta.env.STRIPE_SECRET_KEY, {
 });
 
 export const prerender = false; // muy importante: este endpoint no se prerenderiza
-
+const STOCK_TOTAL = 10;
 export async function POST({ request }) {
-  try {
-    // 1. Leer el carrito que mandas desde /checkout (localStorage → fetch)
-    const body = await request.json(); // { cart: { id: {id, name, price, quantity}, ... } }
+try {
+    const body = await request.json();
     const cart = body.cart || {};
-
     const items = Object.values(cart);
 
-    if (!items.length) {
-      return new Response(JSON.stringify({ error: 'Carrito baleiro' }), {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' },
-      });
+    const totalQuantity = items.reduce(
+      (sum, item) => sum + item.quantity,
+      0
+    );
+
+    if (totalQuantity > STOCK_TOTAL) {
+      return new Response(
+        JSON.stringify({ error: 'Non hai stock suficiente.' }),
+        { status: 400, headers: { 'Content-Type': 'application/json' } }
+      );
     }
 
 // 2. Convertir el carrito en line_items para Checkout

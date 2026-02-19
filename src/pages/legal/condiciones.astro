@@ -1,0 +1,200 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/layout/Header.astro";
+import Footer from "../../components/layout/Footer.astro";
+
+const siteName = "Destino viquingo: A comarca do Salnés";
+const legalName = "Rubén Arturo Terré Lameiro";
+const address = "Santiago de Compostela";
+const domain = "https://destinoviquingo.rubenterre.com";
+---
+
+<Layout>
+  <Header/>
+  <div class="container">
+    <main class="legal-page">
+      <div class="legal-container">
+        <p class="legal-kicker">Información legal</p>
+
+        <h1 class="legal-title">
+          Condiciones del servicio y venta
+        </h1>
+
+        <p class="legal-intro">
+          Las presentes Condiciones del servicio regulan la contratación de
+          productos ofrecidos a través del Sitio web
+          <span class="legal-highlight">{domain}</span>
+          (en adelante, el “Sitio web”), titularidad de
+          <span class="legal-highlight-strong">{legalName}</span>
+          (en adelante, la “Titular”).
+        </p>
+
+        <!-- 1. Identidad de el Titular -->
+        <section class="legal-block legal-block--bordered">
+          <h2 class="legal-heading">1. Identidad de el Titular</h2>
+          <ul class="legal-list">
+            <li>
+              <span class="legal-label">Titular:</span>
+              {legalName}
+            </li>
+            <li>
+              <span class="legal-label">Domicilio:</span>
+              {address}
+            </li>
+            <li>
+              <span class="legal-label">Dominio:</span>
+              {domain}
+            </li>
+            <li>
+              <span class="legal-label">Nombre del sitio:</span>
+              {siteName}
+            </li>
+          </ul>
+        </section>
+
+        <!-- 2. Objeto del servicio -->
+        <section class="legal-block">
+          <h2 class="legal-heading">2. Objeto del servicio</h2>
+          <p class="legal-text">
+            A través del Sitio web, el Titular ofrece la venta en línea del libro
+            <span class="legal-highlight-strong">“Destino viquingo: A comarca do Salnés”</span>,
+            una obra de divulgación histórica sobre as incursións e presenza viquinga en Galicia,
+            así como, en su caso, otros productos editoriales y materiales relacionados.
+          </p>
+          <p class="legal-text">
+            El Sitio web permite consultar información sobre el libro, añadir unidades al carrito,
+            realizar el pago de forma segura a través de pasarelas de pago de terceros y gestionar
+            el envío físico del ejemplar a la dirección indicada por la persona usuaria en territorio español.
+          </p>
+        </section>
+
+        <!-- 3. Naturaleza y uso de los productos -->
+        <section class="legal-block legal-block--bordered">
+          <h2 class="legal-heading">3. Naturaleza y uso de los productos</h2>
+          <p class="legal-text">
+            El producto principal ofrecido a través del Sitio web es un libro físico de carácter
+            divulgativo e histórico sobre los viquingos en Galicia. Su finalidad es informativa,
+            cultural y de ocio, destinada a un uso privado por parte de la persona compradora.
+          </p>
+          <p class="legal-text">
+            el Titular no se hace responsable del uso que se haga del contenido del libro más allá
+            de lo previsto por la normativa aplicable, ni de interpretaciones, decisiones o actuaciones
+            que la persona usuaria adopte basándose en dicha información.
+          </p>
+        </section>
+
+        <!-- 4. Contenidos del Sitio web -->
+        <section class="legal-block">
+          <h2 class="legal-heading">
+            4. Contenidos y materiales del Sitio web
+          </h2>
+          <p class="legal-text">
+            Los textos, imágenes, ilustraciones, maquetas, mapas y demás materiales mostrados en el
+            Sitio web tienen finalidad informativa y promocional del libro y de la temática viquinga
+            en Galicia. Estos contenidos pueden no coincidir exactamente con la edición final impresa,
+            especialmente en lo referente a maquetación, color y pequeños detalles gráficos.
+          </p>
+          <p class="legal-text">
+            La persona usuaria se compromete a no utilizar los contenidos del Sitio web de forma que
+            vulnere derechos de terceros, la normativa aplicable o los presentes términos.
+          </p>
+        </section>
+
+        <!-- 5. Naturaleza de los encargos y unidades -->
+        <section class="legal-block legal-block--bordered">
+          <h2 class="legal-heading">
+            5. Naturaleza de los pedidos y disponibilidad
+          </h2>
+          <p class="legal-text">
+            Los pedidos realizados a través del Sitio web se refieren a unidades físicas del libro
+            disponibles en stock. En caso de que, por error o falta de actualización del inventario,
+            no existan unidades suficientes para atender un pedido confirmado, el Titular contactará
+            con la persona compradora para ofrecer una alternativa (reembolso, espera de nueva edición
+            o solución similar).
+          </p>
+          <p class="legal-text">
+            La persona usuaria es responsable de revisar cuidadosamente los datos de envío y contacto
+            antes de confirmar el pedido. Errores en la información facilitada (dirección incorrecta,
+            datos de contacto incompletos, etc.) pueden dar lugar a retrasos o incidencias en la entrega
+            que no serán imputables a el Titular.
+          </p>
+        </section>
+
+        <!-- 6. Precios, pagos y envíos -->
+        <section class="legal-block">
+          <h2 class="legal-heading">6. Precios, pagos y envíos</h2>
+          <p class="legal-text">
+            Los precios de los productos se muestran en euros e incluyen los impuestos aplicables,
+            salvo indicación expresa en contrario. Antes de finalizar la compra se informará, en su caso,
+            de los gastos de envío correspondientes y de la opción de
+            <span class="legal-highlight-strong">recollida local</span> cuando esté disponible.
+          </p>
+          <p class="legal-text">
+            El pago se realiza mediante los métodos habilitados en cada momento (por ejemplo, tarjeta
+            bancaria a través de pasarela de pago segura). Los envíos se realizan únicamente dentro
+            de España, con las modalidades de envío y plazos orientativos que se indiquen durante el
+            proceso de contratación. Estos plazos pueden verse alterados por causas ajenas a el Titular
+            (incidencias logísticas, festivos, etc.).
+          </p>
+        </section>
+
+        <!-- 7. Propiedad intelectual -->
+        <section class="legal-block legal-block--bordered">
+          <h2 class="legal-heading">
+            7. Propiedad intelectual
+          </h2>
+          <p class="legal-text">
+            El contenido del libro, así como las ilustraciones, mapas, maquetación y demás elementos
+            gráficos vinculados a “Destino viquingo: A comarca do Salnés”, son propiedad de el Titular
+            o se explotan en virtud de las licencias correspondientes. La compra del libro no implica
+            la cesión de derechos de explotación sobre la obra, más allá del uso privado del ejemplar
+            adquirido.
+          </p>
+          <p class="legal-text">
+            Queda prohibida la reproducción, distribución, comunicación pública, transformación o
+            utilización del contenido del libro o de los materiales gráficos del Sitio web con fines
+            comerciales, salvo autorización previa y por escrito de el Titular.
+          </p>
+        </section>
+
+        <!-- 8. Uso del libro y contenidos -->
+        <section class="legal-block">
+          <h2 class="legal-heading">8. Uso del libro y contenidos</h2>
+          <p class="legal-text">
+            El libro tiene una finalidad <u><strong>divulgativa e informativa</strong></u>
+            en torno ás incursións viquingas en Galicia. el Titular no garantiza la
+            absoluta actualización de todos los datos históricos ni se hace responsable del uso
+            que la persona lectora haga de la información más allá del ámbito personal y cultural.
+          </p>
+        </section>
+
+        <!-- 9. Limitación de responsabilidad -->
+        <section class="legal-block legal-block--bordered">
+          <h2 class="legal-heading">9. Limitación de responsabilidad</h2>
+          <p class="legal-text">
+            Dentro de los límites establecidos por la normativa aplicable, el Titular no será
+            responsable de daños indirectos, lucro cesante o pérdida de oportunidad derivados del
+            uso del Sitio web, de la imposibilidad de acceso puntual al mismo o del uso que se haga
+            del libro y de los contenidos adquiridos.
+          </p>
+        </section>
+
+        <!-- 10. Legislación aplicable y jurisdicción -->
+        <section class="legal-block">
+          <h2 class="legal-heading">10. Legislación aplicable y jurisdicción</h2>
+          <p class="legal-text">
+            Las presentes Condiciones del servicio se rigen por la legislación española. Para
+            cualquier controversia derivada de la contratación a través del Sitio web, las partes
+            se someterán a los Juzgados y Tribunales de {address}, salvo que la normativa imperativa
+            en materia de consumidores disponga otro fuero distinto.
+          </p>
+        </section>
+
+        <p class="legal-updated">
+          Última actualización: 19 de febrero de 2026.
+        </p>
+      </div>
+    </main>
+  </div>
+  <Footer/>
+</Layout>

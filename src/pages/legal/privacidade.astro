@@ -1,0 +1,211 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/layout/Header.astro";
+
+const siteName = "Destino viquingo: a comarca do Salnés";
+const legalName = "Rubén Arturo Terré Lameiro";
+const address = "Santiago de Compostela";
+const domain = "https://destinoviquingo.rubenterre.com";
+const email = "info@rubenterre.com";
+---
+
+<Layout>
+    <div class="container">
+    <Header/>
+  <main class="legal-page">
+    <div class="legal-container">
+      <p class="legal-kicker">Información legal</p>
+
+      <h1 class="legal-title">
+        Política de privacidad
+      </h1>
+
+      <p class="legal-intro">
+        La presente Política de privacidad tiene por objeto informar a las personas usuarias del Sitio web
+        <span class="legal-highlight">{domain}</span>
+        (en adelante, el “Sitio web”) sobre el tratamiento de sus datos personales,
+        de conformidad con el Reglamento (UE) 2016/679 (RGPD) y la Ley Orgánica 3/2018 (LOPDGDD). 
+      </p>
+
+      <!-- 1. Responsable del tratamiento -->
+      <section class="legal-block legal-block--bordered">
+        <h2 class="legal-heading">1. Responsable del tratamiento</h2>
+        <ul class="legal-list">
+          <li>
+            <span class="legal-label">Responsable:</span>
+            {legalName}
+          </li>
+          <li>
+            <span class="legal-label">Domicilio:</span>
+            {address}
+          </li>
+          <li>
+            <span class="legal-label">Correo electrónico de contacto:</span>
+            <a href={`mailto:${email}`} class="legal-link">{email}</a>
+          </li>
+          <li>
+            <span class="legal-label">Sitio web:</span>
+            {domain}
+          </li>
+        </ul>
+      </section>
+
+      <!-- 2. Datos tratados, finalidades y legitimación -->
+      <section class="legal-block">
+        <h2 class="legal-heading">
+          2. Datos personales tratados, finalidades y base jurídica
+        </h2>
+        <p class="legal-text">
+          A través del Sitio web, la Responsable puede tratar los siguientes
+          datos personales, facilitados directamente por la persona usuaria
+          mediante formularios de contacto o encargo de entradas: nombre y
+          apellidos, datos de contacto (correo electrónico, teléfono), datos
+          necesarios para el envío (dirección postal), así como la información
+          incluida en los mensajes o campos de personalización de las entradas
+          conmemorativas. 
+        </p>
+        <p class="legal-text">
+          Las finalidades principales del tratamiento son: gestionar y responder
+          a consultas o solicitudes recibidas, gestionar los encargos de
+          entradas conmemorativas personalizadas, realizar la facturación y
+          labores administrativas asociadas, y, en su caso, enviar comunicaciones
+          relacionadas con el encargo realizado (confirmaciones, incidencias,
+          actualizaciones sobre el pedido).
+        </p>
+        <p class="legal-text">
+          La base jurídica del tratamiento es la ejecución de la relación
+          contractual o precontractual con la persona usuaria (gestión de
+          encargos y solicitudes), el cumplimiento de obligaciones legales en
+          materia fiscal y contable, y, en su caso, el consentimiento
+          explícito prestado por la persona usuaria para determinadas
+          finalidades (por ejemplo, recepción de comunicaciones comerciales),
+          que podrá revocar en cualquier momento. 
+        </p>
+      </section>
+
+      <!-- 3. Origen de los datos -->
+      <section class="legal-block legal-block--bordered">
+        <h2 class="legal-heading">3. Origen de los datos</h2>
+        <p class="legal-text">
+          Con carácter general, los datos personales se obtienen directamente
+          de la persona usuaria a través de los formularios habilitados en el
+          Sitio web o mediante comunicación directa por correo electrónico u
+          otros medios de contacto indicados. 
+        </p>
+      </section>
+
+      <!-- 4. Conservación de los datos -->
+      <section class="legal-block">
+        <h2 class="legal-heading">4. Plazos de conservación</h2>
+        <p class="legal-text">
+          Los datos serán conservados durante el tiempo necesario para atender
+          la finalidad para la que fueron recabados. En el caso de encargos de
+          entradas conmemorativas, se conservarán mientras se mantenga la
+          relación contractual y, posteriormente, durante los plazos exigidos
+          por la normativa fiscal y contable.
+        </p>
+        <p class="legal-text">
+          Determinados datos básicos de contacto podrán conservarse de forma
+          bloqueada mientras puedan derivarse responsabilidades legales de la
+          relación entre las partes o exista alguna reclamación pendiente de
+          resolución. 
+        </p>
+      </section>
+
+      <!-- 5. Destinatarios y encargados de tratamiento -->
+      <section class="legal-block legal-block--bordered">
+        <h2 class="legal-heading">
+          5. Destinatarios y encargados de tratamiento
+        </h2>
+        <p class="legal-text">
+          Con carácter general, los datos personales no se comunicarán a
+          terceros, salvo obligación legal o cuando sea necesario para la
+          correcta prestación del servicio (por ejemplo, servicios de
+          mensajería o proveedores de servicios tecnológicos que actúan como
+          encargados de tratamiento).
+        </p>
+        <p class="legal-text">
+          En estos casos, la Responsable adoptará las medidas necesarias para
+          que dichos proveedores ofrezcan garantías suficientes de cumplimiento
+          del RGPD y firmará con ellos los correspondientes contratos de
+          encargo de tratamiento.
+        </p>
+      </section>
+
+      <!-- 6. Transferencias internacionales -->
+      <section class="legal-block">
+        <h2 class="legal-heading">6. Transferencias internacionales de datos</h2>
+        <p class="legal-text">
+          Con carácter general, no se prevén transferencias internacionales de
+          datos fuera del Espacio Económico Europeo. En caso de utilizar
+          servicios de proveedores ubicados en terceros países, se garantizará
+          el cumplimiento de las exigencias del RGPD, adoptando las garantías
+          adecuadas (como cláusulas contractuales tipo aprobadas por la
+          Comisión Europea).
+        </p>
+      </section>
+
+      <!-- 7. Derechos de las personas usuarias -->
+      <section class="legal-block legal-block--bordered">
+        <h2 class="legal-heading">7. Derechos en materia de protección de datos</h2>
+        <p class="legal-text">
+          La persona usuaria puede ejercitar en cualquier momento sus derechos
+          de acceso, rectificación, supresión, oposición, limitación del
+          tratamiento y portabilidad de sus datos, en los términos previstos
+          en la normativa de protección de datos.
+        </p>
+        <p class="legal-text">
+          Para el ejercicio de estos derechos, podrá dirigirse por escrito a la
+          Responsable, acreditando su identidad, mediante correo electrónico a
+          <a href={`mailto:${email}`} class="legal-link">{email}</a>.
+          Asimismo, tiene derecho a presentar una reclamación ante la Agencia
+          Española de Protección de Datos (<a href="https://www.aepd.es" class="legal-link" target="_blank" rel="noreferrer">www.aepd.es</a>)
+          si considera que el tratamiento de sus datos no se ajusta a la
+          normativa vigente. 
+        </p>
+      </section>
+
+      <!-- 8. Seguridad de los datos -->
+      <section class="legal-block">
+        <h2 class="legal-heading">8. Medidas de seguridad</h2>
+        <p class="legal-text">
+          La Responsable aplicará las medidas técnicas y organizativas
+          apropiadas para garantizar un nivel de seguridad adecuado al riesgo,
+          evitando, en la medida de lo posible, la alteración, pérdida,
+          tratamiento o acceso no autorizado a los datos personales.
+        </p>
+      </section>
+
+      <!-- 9. Cookies y tecnologías similares -->
+      <section class="legal-block legal-block--bordered">
+        <h2 class="legal-heading">9. Cookies y tecnologías similares</h2>
+        <p class="legal-text">
+          El Sitio web puede utilizar cookies o tecnologías similares para
+          mejorar la experiencia de navegación o con fines estadísticos. La
+          persona usuaria puede obtener información detallada sobre el uso de
+          cookies, así como configurar sus preferencias, en la Política de
+          cookies del Sitio web.
+        </p>
+      </section>
+
+      <!-- 10. Modificación de la Política de privacidad -->
+      <section class="legal-block">
+        <h2 class="legal-heading">10. Modificaciones de la Política de privacidad</h2>
+        <p class="legal-text">
+          La Responsable se reserva el derecho a modificar la presente Política
+          de privacidad para adaptarla a novedades legislativas o jurisprudenciales,
+          así como a cambios en la prestación de servicios. Las modificaciones
+          se publicarán en esta misma página, por lo que se recomienda revisar
+          periódicamente su contenido.
+        </p>
+      </section>
+
+      <p class="legal-updated">
+        Última actualización: 19 de febrero de 2026.
+      </p>
+    </div>
+  </main>
+  </div>
+</Layout>
+
+<!-- Estilos en Layout -->

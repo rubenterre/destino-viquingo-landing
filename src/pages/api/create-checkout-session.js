@@ -8,7 +8,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
 export const prerender = false; // muy importante: este endpoint no se prerenderiza
 const STOCK_TOTAL = 10;
 export async function POST({ request }) {
-try {
+  try {
     const body = await request.json();
     const cart = body.cart || {};
     const items = Object.values(cart);
@@ -25,17 +25,17 @@ try {
       );
     }
 
-// 2. Convertir el carrito en line_items para Checkout
-const line_items = items.map((item) => ({
-  quantity: item.quantity,
-  price_data: {
-    currency: 'eur',
-    unit_amount: item.price,
-    product_data: {
-      name: item.name,
-    },
-  },
-}));
+    // 2. Convertir el carrito en line_items para Checkout
+    const line_items = items.map((item) => ({
+      quantity: item.quantity,
+      price_data: {
+        currency: 'eur',
+        unit_amount: item.price,
+        product_data: {
+          name: item.name,
+        },
+      },
+    }));
 
 
 
@@ -50,10 +50,13 @@ const line_items = items.map((item) => ({
         allowed_countries: ['ES'], // o ['ES', 'PT'] si amplías
       },
 
-       shipping_options: [
-    { shipping_rate: 'shr_1T2Um1QbEqODwiBXalOOQPxQ' }, //envío pagado
-    {shipping_rate: 'shr_1T2UpnQbEqODwiBXHuhd4qZx'} // envío recollida
-  ],
+
+      shipping_options: [
+        { shipping_rate: "shr_1T2aNRHjNOdqkZ11GeJAXfoa" },
+        //envío pagado
+        { shipping_rate: "shr_1T2aONHjNOdqkZ11K54M1qhw" }
+        // envío recollida
+      ],
       phone_number_collection: {
         enabled: true,
       },

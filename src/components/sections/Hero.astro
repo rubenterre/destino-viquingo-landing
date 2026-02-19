@@ -91,12 +91,12 @@ import nieblaBottom from "../../assets/niebla_bottom.webp";
     z-index: 1;
     display: flex;
     align-items: center;
-    padding: 4rem 0 6rem;
+    padding: 4rem 0 2rem;
   }
 
   @media (max-width: 600px) {
     .hero__content {
-      padding: 3rem 0 4rem;
+      padding: 3rem 0 0rem;
     }
 
     .hero {
@@ -155,6 +155,16 @@ import nieblaBottom from "../../assets/niebla_bottom.webp";
 
   .hero__libro-img {
     width: 100%;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-15px);
+    }
   }
 
   /* Niebla de ornamento */
